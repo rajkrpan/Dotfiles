@@ -1,0 +1,15 @@
+[user]
+	name  = Raj Kumar Pan
+	email = rajkrpan@gmail.com
+[color]
+	ui = auto
+	branch = auto
+	status = auto
+[core]
+	editor = vim
+[alias]
+	c  = commit
+	cm = commit -m
+	st = status
+        br = branch
+        co = checkout
