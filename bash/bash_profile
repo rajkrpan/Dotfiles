@@ -1,0 +1,7 @@
+# Include .bashrc if it exists
+if [ -f ~/.bashrc ]; then
+	source ~/.bashrc
+fi
+
+# added by Miniconda 3.10.1 installer
+export PATH="/Users/rajkp/miniconda/bin:$PATH"
