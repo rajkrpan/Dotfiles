@@ -7,9 +7,29 @@
 	status = auto
 [core]
 	editor = vim
+	excludesfile = C:/Users/raj/.gitignore_global
 [alias]
 	c  = commit
 	cm = commit -m
+
 	st = status
-        br = branch
+
+        br  = branch
+	brd = branch -d
+
         co = checkout
+	df = diff
+
+	# Exploring history
+	lg = log -p
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+
+	# Assumed commands
+	assume = update-index --assume-unchanged
+	unassume = update-index --no-assume-unchanged
+	assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+	unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
+	
