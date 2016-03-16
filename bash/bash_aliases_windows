@@ -1,0 +1,21 @@
+#PATH=/usr/local/bin:/usr/local/texlive/2012/bin/universal-darwin/:$PATH
+
+# Some helpful aliases
+alias c='clear'
+alias s='cd ..'
+alias q='exit'
+alias vi='vim'
+alias rm='rm -i -v'
+alias mv='mv -i'
+alias cp='cp -i'
+alias ls='ls -G --color'
+alias l='ls -l --color'
+alias lsd='ls -d */'
+alias dir='ls -d */'
+
+# Change the size of bash_history file
+export HISTSIZE=100000
+export HISTCONTROL=ignoreboth
+export HISTIGNORE="top:ls -l:"
+export HISTIGNORE='??'
+export HISTIGNORE='?'
