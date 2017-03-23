@@ -21,18 +21,23 @@ Plugin 'gmarik/vundle'
 " Original repos on github
 " Vim as a wiki
 Plugin 'https://github.com/vim-scripts/vimwiki'
+" Markdown Vim Mode
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 " Insert mode completions with Tab
 Plugin 'https://github.com/ervandew/supertab'
 " Precision colorscheme for the vim text editor
 Plugin 'https://github.com/altercation/vim-colors-solarized'
+" Vim Colorscheme
+Plugin 'flazz/vim-colorschemes'
 " Better Whitespace Plugin
 Plugin 'https://github.com/ntpeters/vim-better-whitespace'
 " Fuzzy file, buffer, tag, etc finder.
 Plugin 'https://github.com/kien/ctrlp.vim'
 " Insert mode auto-completion for quotes, parens, brackets, etc.
 Plugin 'https://github.com/Raimondi/delimitMate'
-" Visually displaying indent levels in code
-"Plugin 'https://github.com/nathanaelkane/vim-indent-guides'
+" Easily add, delete and change surroundings: parentheses, brackets, quote, etc.
+Plugin 'https://github.com/tpope/vim-surround'
 
 "" LanguageTool grammar checker
 "Bundle 'https://github.com/vim-scripts/LanguageTool'
@@ -135,6 +140,11 @@ autocmd FileType matlab,octave set ts=2 sw=2 cindent "matlab & octave
 autocmd FileType bib set ts=2 sw=2 cindent " bibliography
 autocmd FileType html,mail,tex set ts=2 sw=2 " Html, Mail, Tex
 autocmd FileType vimwiki set ts=2 sw=2 " Html, Mail, Tex
+
+" Whitespace management
+autocmd FileType c,cpp,r autocmd BufWritePre <buffer> StripWhitespace
+autocmd FileType python,sh autocmd BufWritePre <buffer> StripWhitespace
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
