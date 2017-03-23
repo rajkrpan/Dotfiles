@@ -12,6 +12,9 @@ alias ls='ls -G --color'
 alias l='ls -l --color'
 alias lsd='ls -d */'
 alias dir='ls -d */'
+alias gvim='/c/Program\ Files\ \(x86\)/Vim/vim74/gvim.exe'
+alias lein='~/.lein/bin/lein.bat'
+
 
 # Change the size of bash_history file
 export HISTSIZE=100000
