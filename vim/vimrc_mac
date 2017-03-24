@@ -131,7 +131,7 @@ autocmd FileType c,cpp,octave,slang set cindent
 autocmd FileType python,sh set ts=4 sw=4 et "Python, shell
 autocmd FileType r,c,cpp,bib set ts=2 sw=2 cindent "C & C++
 autocmd FileType matlab,octave set ts=2 sw=2 cindent "matlab & octave
-autocmd FileType bib, markdown set ts=2 sw=2 cindent " bibliography
+autocmd FileType bib,markdown set ts=2 sw=2 cindent " bibliography
 autocmd FileType html,mail,tex set ts=2 sw=2 " Html, Mail, Tex
 autocmd FileType vimwiki set ts=2 sw=2 " Html, Mail, Tex
 
@@ -211,6 +211,9 @@ autocmd FileType vimwiki set noswapfile
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args='--ignore=E501,E226,F401'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_folding_disabled = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
