@@ -7,8 +7,8 @@
 	status = auto
 [core]
 	editor = vim
-	excludesfile = C:/Users/raj/.gitignore_global
-	autocrlf = true
+	excludesfile = ~/.gitignore_global
+	autocrlf = input
 
 [alias]
         # Commits

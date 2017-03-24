@@ -12,6 +12,9 @@ cp bash/bash_aliases_windows ~/.bash_aliases
 cp bash/inputrc ~/.inputrc
 cp bash/bashrc_windows ~/.bashrc
 
+# Git Files
+ln -s ~/DotFiles/git/gitconfig ~/.gitconfig
+ln -s ~/DotFiles/git/gitignore_global ~/.gitignore_global
 
 # From windows to git
 cp ~/_vimrc ~/Projects/Dotfiles/Vim/vimrc_windows

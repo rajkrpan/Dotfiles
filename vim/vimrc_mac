@@ -1,40 +1,51 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vundle
 " Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just
+" :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 " see :h vundle for more details or wiki for FAQ
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible               " Prevents vim from emulating vi's limitations
-filetype on                    " Detect the type of file
 filetype off                   " required!
-
-set rtp+=~/.vim/bundle/vundle/ 
-call vundle#rc()
-
+"
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+"
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-
-" Original repos on github              
-" Vim and latex 
-Bundle 'https://github.com/jcf/vim-latex' 
-" Vim as a wiki 
-Bundle 'https://github.com/vim-scripts/vimwiki'         
-" LanguageTool grammar checker
-Bundle 'https://github.com/vim-scripts/LanguageTool'
-" Syntax checking plugin
-Bundle 'https://github.com/scrooloose/syntastic'
+Plugin 'gmarik/vundle'
+"
+" Original repos on github
+" Vim as a wiki
+Plugin 'https://github.com/vim-scripts/vimwiki'
+" Markdown Vim Mode
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 " Insert mode completions with Tab
-Bundle 'https://github.com/ervandew/supertab'
-" Open Files with minimal number of keystrokes 
-Bundle 'https://github.com/wincent/Command-T'
+Plugin 'https://github.com/ervandew/supertab'
 " Precision colorscheme for the vim text editor
-Bundle 'https://github.com/altercation/vim-colors-solarized'
-" Quicktask is a lightweight Vim task management plugin
-Bundle 'https://github.com/aaronbieber/quicktask/'
-
+Plugin 'https://github.com/altercation/vim-colors-solarized'
+" Vim Colorscheme
+Plugin 'flazz/vim-colorschemes'
+" Better Whitespace Plugin
+Plugin 'https://github.com/ntpeters/vim-better-whitespace'
+" Fuzzy file, buffer, tag, etc finder.
+Plugin 'https://github.com/kien/ctrlp.vim'
+" Insert mode auto-completion for quotes, parens, brackets, etc.
+Plugin 'https://github.com/Raimondi/delimitMate'
+" Easily add, delete and change surroundings: parentheses, brackets, quote, etc.
+Plugin 'https://github.com/tpope/vim-surround'
+" Vim and latex
+Plugin 'https://github.com/jcf/vim-latex'
+" LanguageTool grammar checker
+Plugin 'https://github.com/vim-scripts/LanguageTool'
+" Syntax checking plugin
+Plugin 'https://github.com/scrooloose/syntastic'
+" Open Files with minimal number of keystrokes
+Plugin 'https://github.com/wincent/Command-T'
+"
 "Bundle 'tpope/vim-fugitive'
 "Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -42,24 +53,30 @@ Bundle 'https://github.com/aaronbieber/quicktask/'
 "Bundle 'L9'
 "Bundle 'FuzzyFinder'
 "Bundle 'rails.vim'
-
+"
+call vundle#end()         "required
+filetype plugin indent on " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible    " Prevents vim from emulating vi's limitations
-set history=1000    " How many lines of history to remember
-"filetype on         " Detect the type of file
+set history=10000   " How many lines of history to remember
+"filetype on        " Detect the type of file
 filetype plugin on  " Enable filetype plugin
 filetype indent on  " Enable filetype indent
-"set mouse=a         " Enable mouse usage in terminals
-set mouse=v         " Enable mouse usage in terminals
+set mouse=a         " Enable mouse usage in terminals
+"set mouse=v        " Enable mouse usage in terminals
+set number          " Use line number by default
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Latex-Suite
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set grepprg=grep\ -nH\ $* " Set grep to always generate a file-name.
-set iskeyword+=:    " Type in \ref{fig: and press <C-n> you will automatically 
-                    " cycle through all the figure labels
+autocmd FileType tex set iskeyword+=:  " Type in \ref{fig: and press <C-n> to
+                                       " cycle through figure labels
 let g:tex_flavor='latex'
                     " filetype of empty .tex files defaults to 'tex'
 let g:Tex_DefaultTargetFormat = 'pdf'
@@ -67,25 +84,29 @@ let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_CompileRule_pdf = 'pdflatex -interaction=nonstopmode $*'
 let g:Tex_ViewRule_pdf = 'evince'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-:syntax enable
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax on           "Enables syntax highlighting
-set background=dark "If general background is black
+syntax on             "Enables syntax highlighting
+"set background=dark  "If general background is black
 "set background=light "If general background is black
-colorscheme solarized " Solarize color scheme
+"set t_Co=256
+"colorscheme solarized " Solarize color scheme
+colorscheme Monokai    " Monokai color scheme
+"let g:solarized_termtrans=1
+"let g:solarized_italic=0 " Comments not italic in solarize scheme
+"let g:solarized_contrast="high"
+"let g:solarized_visibility="high"
 
 "switch backgrounds using the key F11
 map <F9> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Text formatting/Layout 
+" Text formatting/Layout
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set autoindent	    " Always set autoindenting on
-set smartindent
-set expandtab       " Use spaces for tabs 
+"set smartindent
+set expandtab       " Use spaces for tabs
 set smarttab        " Use tabs at the start of line, spaces elsewhere
 
 " Select .txt files as human
@@ -98,24 +119,29 @@ augroup filetype
   autocmd BufNewFile,BufRead *.qt set filetype=quicktask
 augroup END
 
-" Vim load textwidth rules according to the detected filetype. 
+" Vim load textwidth rules according to the detected filetype.
 autocmd FileType text,mail,human setlocal textwidth=72
 autocmd FileType plaintex,tex setlocal textwidth=75
-autocmd FileType vimwiki set textwidth=0 
-autocmd FileType r,c,cpp,octave,slang set cindent
+autocmd FileType vimwiki set textwidth=0
+autocmd FileType c,cpp,octave,slang set cindent
 
-" Indenting according to the detected filetype. 
+" Indenting according to the detected filetype.
 " ts = tabstop (Spaces used when text is indented)
 " sw = shiftwidth
 autocmd FileType python,sh set ts=4 sw=4 et "Python, shell
 autocmd FileType r,c,cpp,bib set ts=2 sw=2 cindent "C & C++
-autocmd FileType matlab,octave set ts=2 sw=2 cindent "C & C++
+autocmd FileType matlab,octave set ts=2 sw=2 cindent "matlab & octave
+autocmd FileType bib,markdown set ts=2 sw=2 cindent " bibliography
 autocmd FileType html,mail,tex set ts=2 sw=2 " Html, Mail, Tex
 autocmd FileType vimwiki set ts=2 sw=2 " Html, Mail, Tex
+
+" Whitespace management
+autocmd FileType c,cpp,r autocmd BufWritePre <buffer> StripWhitespace
+autocmd FileType python,sh autocmd BufWritePre <buffer> StripWhitespace
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" User Interface 
+" User Interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set ruler           " Always show current position
 set showmatch		    " Show matching brackets.
@@ -125,26 +151,26 @@ set scrolloff=2     " Keep some context visible around the cursor
 set visualbell      " Blink
 set noerrorbells    " No noises
 set backspace=2     " Make backspace work normal
-set lazyredraw      " Do not redraw while running macros (faster) 
+set lazyredraw      " Do not redraw while running macros (faster)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Visual Cues 
+" Visual Cues
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set incsearch       " Incremental searching
 set ignorecase      " Ignore Case while search
-set smartcase       " Uppercase make search case senstive  
+set smartcase       " Uppercase make search case senstive
 " Search and replace selected text
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Keystrokes - Moving Around 
+" Keystrokes - Moving Around
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set whichwrap=h,l   " The cursor keys wrap between lines
-" Page down with <Space> and Page up with - 
-noremap <Space> <PageDown> 
-noremap - <PageUp> 
+" Page down with <Space> and Page up with -
+noremap <Space> <PageDown>
+noremap - <PageUp>
 set backspace=eol,start,indent " Allow <BkSpc> to delete line breaks
 " Press jj to exit from insert mode
 inoremap jj <Esc>
@@ -154,15 +180,14 @@ inoremap ww <Esc>:w<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Python Comments indentation 
+" Python Comments indentation
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 inoremap # X#
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim check spell according to the detected filetype. 
-autocmd FileType text,mail,human setlocal spell spelllang=en_us 
+" Vim check spell according to the detected filetype.
+autocmd FileType text,mail,human setlocal spell spelllang=en_us
 autocmd FileType vimwiki,plaintex,tex setlocal spell spelllang=en_us
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -180,6 +205,15 @@ ab fro for
 autocmd FileType vimwiki set noswapfile
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntastic : Syntax checking
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_flake8_args='--ignore=E501,E226,F401'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_folding_disabled = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -238,8 +272,15 @@ while i <= 9
     let i = i + 1
 endwhile
 
+" Copy paste from windows clipboard
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <ESC>"+pa
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"Disable white space by default
+"DisableWhitespace
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set Paths
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -252,3 +293,6 @@ let g:languagetool_jar='$HOME/usr/local/LanguageTool-2.2/languagetool-commandlin
 " Run time path
 set runtimepath+=/usr/share/vim/addons/,/home/rajkp/.vim
 
+"let g:ctrlp_map = '<c-p>'
+"let g:ctrlp_cmd = 'CtrlP'
+"let g:ctrlp_working_path_mode='ra'

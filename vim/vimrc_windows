@@ -6,7 +6,6 @@
 " :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
 " see :h vundle for more details or wiki for FAQ
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible               " Prevents vim from emulating vi's limitations
@@ -38,31 +37,29 @@ Plugin 'https://github.com/kien/ctrlp.vim'
 Plugin 'https://github.com/Raimondi/delimitMate'
 " Easily add, delete and change surroundings: parentheses, brackets, quote, etc.
 Plugin 'https://github.com/tpope/vim-surround'
-
-"" LanguageTool grammar checker
-"Bundle 'https://github.com/vim-scripts/LanguageTool'
-"" Syntax checking plugin
-"Bundle 'https://github.com/scrooloose/syntastic'
-"" Open Files with minimal number of keystrokes
-"Bundle 'https://github.com/wincent/Command-T'
-"" Quicktask is a lightweight Vim task management plugin
-"Bundle 'https://github.com/aaronbieber/quicktask/'
+" Vim and latex
+"Plugin 'https://github.com/jcf/vim-latex'
+" LanguageTool grammar checker
+"Plugin 'https://github.com/vim-scripts/LanguageTool'
+" Syntax checking plugin
+"Plugin 'https://github.com/scrooloose/syntastic'
+" Open Files with minimal number of keystrokes
+"Plugin 'https://github.com/wincent/Command-T'
 "
-""Bundle 'tpope/vim-fugitive'
-""Bundle 'Lokaltog/vim-easymotion'
-""Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-"" vim-scripts repos
-""Bundle 'L9'
-""Bundle 'FuzzyFinder'
-""Bundle 'rails.vim'
-"
-"
+"Bundle 'tpope/vim-fugitive'
+"Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+" vim-scripts repos
+"Bundle 'L9'
+"Bundle 'FuzzyFinder'
+"Bundle 'rails.vim'
 "
 call vundle#end()         "required
 filetype plugin indent on " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -79,7 +76,6 @@ set guifont=Consolas:h12:cANSI  " Use consolas font
 " Latex-Suite
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set grepprg=grep\ -nH\ $* " Set grep to always generate a file-name.
-
 autocmd FileType tex set iskeyword+=:  " Type in \ref{fig: and press <C-n> to
                                        " cycle through figure labels
 let g:tex_flavor='latex'
@@ -88,8 +84,6 @@ let g:Tex_DefaultTargetFormat = 'pdf'
                     " Default target formats
 let g:Tex_CompileRule_pdf = 'pdflatex -interaction=nonstopmode $*'
 let g:Tex_ViewRule_pdf = 'evince'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"":syntax enable
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -135,16 +129,15 @@ autocmd FileType c,cpp,octave,slang set cindent
 " ts = tabstop (Spaces used when text is indented)
 " sw = shiftwidth
 autocmd FileType python,sh set ts=4 sw=4 et "Python, shell
-autocmd FileType c,cpp,r set ts=2 sw=2 cindent "C & C++
+autocmd FileType r,c,cpp,bib set ts=2 sw=2 cindent "C & C++
 autocmd FileType matlab,octave set ts=2 sw=2 cindent "matlab & octave
-autocmd FileType bib set ts=2 sw=2 cindent " bibliography
+autocmd FileType bib, markdown set ts=2 sw=2 cindent " bibliography
 autocmd FileType html,mail,tex set ts=2 sw=2 " Html, Mail, Tex
 autocmd FileType vimwiki set ts=2 sw=2 " Html, Mail, Tex
 
 " Whitespace management
 autocmd FileType c,cpp,r autocmd BufWritePre <buffer> StripWhitespace
 autocmd FileType python,sh autocmd BufWritePre <buffer> StripWhitespace
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -277,10 +270,6 @@ while i <= 9
 endwhile
 
 " Copy paste from windows clipboard
-"nnoremap <C-c> "+y
-"vnoremap <C-c> "+y
-"nnoremap <C-v> "+gP
-"vnoremap <C-v> "+gP
 vmap <C-c> "+yi
 vmap <C-x> "+c
 vmap <C-v> c<ESC>"+p
@@ -289,7 +278,6 @@ imap <C-v> <ESC>"+pa
 
 "Disable white space by default
 "DisableWhitespace
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set Paths
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -301,10 +289,7 @@ let g:vimwiki_list = [{'path': '~/OneDrive\ -\ Microsoft/VimWiki/', 'path_html':
 
 " Run time path
 "set runtimepath+=/home/rajkp/.vim
-",/usr/share/vim/addons/
 
 "let g:ctrlp_map = '<c-p>'
 "let g:ctrlp_cmd = 'CtrlP'
 "let g:ctrlp_working_path_mode='ra'
-
-
