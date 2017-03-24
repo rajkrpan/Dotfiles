@@ -1,0 +1,29 @@
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"ColorScheme
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set background=dark  "If general background is black
+"set background=light "If general background is black
+"colorscheme solarized " Solarize color scheme
+"colorscheme monokai    " Monokai color scheme
+colorscheme wombat     " Wombat color scheme
+"hi Comment gui=none   " remove italics from comments
+"let g:solarized_termtrans=1
+"let g:solarized_italic=0 " Comments not italic in solarize scheme
+"let g:solarized_contrast="high"
+"let g:solarized_visibility="high"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Fonts
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set guifont=Consolas:h11
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Hide Toolbar/Menubar/Scrollbar
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set guioptions -=T
+"set guioptions -=m
+set guioptions -=r
+set guioptions -=L
+
+" Windows size
+set lines=70 columns=140
