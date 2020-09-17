@@ -1,11 +1,11 @@
-
+" copied to _gvimrc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 "ColorScheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-set background=dark  "If general background is black
-"set background=light "If general background is black
+set background=dark    "If general background is black
+"set background=light  "If general background is black
 "colorscheme solarized " Solarize color scheme
-"colorscheme monokai    " Monokai color scheme
+"colorscheme monokai   " Monokai color scheme
 colorscheme wombat     " Wombat color scheme
 "hi Comment gui=none   " remove italics from comments
 "let g:solarized_termtrans=1
@@ -17,6 +17,7 @@ colorscheme wombat     " Wombat color scheme
 "Fonts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 set guifont=Consolas:h11
+set encoding=utf-8
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Hide Toolbar/Menubar/Scrollbar
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -27,3 +28,6 @@ set guioptions -=L
 
 " Windows size
 set lines=70 columns=140
+
+" Switch to default directory
+cd ~\Projects\MS\

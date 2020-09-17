@@ -6,22 +6,29 @@
 " :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
 " see :h vundle for more details or wiki for FAQ
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible               " Prevents vim from emulating vi's limitations
 filetype off                   " required!
 "
 set rtp+=C:/Users/raj/vimfiles/bundle/Vundle.vim
+set rtp+=~/.fzf
 call vundle#begin('C:/Users/raj/vimfiles/bundle/')
 "
 " let Vundle manage Vundle
 Plugin 'gmarik/vundle'
 "
 " Original repos on github
+" Best Git wrapper of all time
+Plugin 'https://github.com/tpope/vim-fugitive'
+" A general-purpose command-line fuzzy finder.
+Plugin 'junegunn/fzf'
 " Vim as a wiki
 Plugin 'https://github.com/vim-scripts/vimwiki'
-" Markdown Vim Mode
+" Text formatting
 Plugin 'godlygeek/tabular'
+" Markdown Vim Mode
 Plugin 'plasticboy/vim-markdown'
 " Insert mode completions with Tab
 Plugin 'https://github.com/ervandew/supertab'
@@ -46,32 +53,29 @@ Plugin 'https://github.com/tpope/vim-surround'
 " Open Files with minimal number of keystrokes
 "Plugin 'https://github.com/wincent/Command-T'
 "
-"Bundle 'tpope/vim-fugitive'
 "Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-" vim-scripts repos
 "Bundle 'L9'
 "Bundle 'FuzzyFinder'
 "Bundle 'rails.vim'
 "
 call vundle#end()         "required
 filetype plugin indent on " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Change <leader> key to ,
+let mapleader = ","
 set nocompatible    " Prevents vim from emulating vi's limitations
 set history=10000   " How many lines of history to remember
-"filetype on        " Detect the type of file
-filetype plugin on  " Enable filetype plugin
-filetype indent on  " Enable filetype indent
 set mouse=a         " Enable mouse usage in terminals
 "set mouse=v        " Enable mouse usage in terminals
 set number          " Use line number by default
+"set relativenumber  " Set relative line number
 set guifont=Consolas:h12:cANSI  " Use consolas font
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Ignore thiese files in Windows
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Latex-Suite
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -84,6 +88,7 @@ let g:Tex_DefaultTargetFormat = 'pdf'
                     " Default target formats
 let g:Tex_CompileRule_pdf = 'pdflatex -interaction=nonstopmode $*'
 let g:Tex_ViewRule_pdf = 'evince'
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -105,7 +110,6 @@ map <F9> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 " Text formatting/Layout
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set autoindent	    " Always set autoindenting on
-"set smartindent
 set expandtab       " Use spaces for tabs
 set smarttab        " Use tabs at the start of line, spaces elsewhere
 
@@ -121,17 +125,17 @@ augroup END
 
 " Vim load textwidth rules according to the detected filetype.
 autocmd FileType text,mail,human setlocal textwidth=72
-"autocmd FileType plaintex,tex setlocal textwidth=75
 autocmd FileType vimwiki set textwidth=0
 autocmd FileType c,cpp,octave,slang set cindent
 
 " Indenting according to the detected filetype.
 " ts = tabstop (Spaces used when text is indented)
 " sw = shiftwidth
+" get filetype by set ft?
 autocmd FileType python,sh set ts=4 sw=4 et "Python, shell
-autocmd FileType r,c,cpp,bib set ts=2 sw=2 cindent "C & C++
+autocmd FileType c,cpp,r,sql set ts=2 sw=2 cindent "C & C++
 autocmd FileType matlab,octave set ts=2 sw=2 cindent "matlab & octave
-autocmd FileType bib, markdown set ts=2 sw=2 cindent " bibliography
+autocmd FileType bib,markdown set ts=2 sw=2 cindent " bibliography
 autocmd FileType html,mail,tex set ts=2 sw=2 " Html, Mail, Tex
 autocmd FileType vimwiki set ts=2 sw=2 " Html, Mail, Tex
 
@@ -144,9 +148,9 @@ autocmd FileType python,sh autocmd BufWritePre <buffer> StripWhitespace
 " User Interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set ruler           " Always show current position
-set showmatch		    " Show matching brackets.
+set showmatch	    " Show matching brackets.
 set mat=5           " tenths of a second to blink matching brackets for
-set showcmd		      " Show (partial) command in status line.
+set showcmd	    " Show (partial) command in status line.
 set scrolloff=2     " Keep some context visible around the cursor
 set visualbell      " Blink
 set noerrorbells    " No noises
@@ -160,6 +164,8 @@ set lazyredraw      " Do not redraw while running macros (faster)
 set incsearch       " Incremental searching
 set ignorecase      " Ignore Case while search
 set smartcase       " Uppercase make search case senstive
+" clear out a search by typing <leader><space>
+nnoremap <leader><space> :noh<cr>
 " Search and replace selected text
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -172,7 +178,7 @@ set whichwrap=h,l   " The cursor keys wrap between lines
 noremap <Space> <PageDown>
 noremap - <PageUp>
 set backspace=eol,start,indent " Allow <BkSpc> to delete line breaks
-" Press jj to exit from insert mode
+" jj to exit from insert mode
 inoremap jj <Esc>
 " ww to save all buffers in command mode and insert mode.
 map ww :w<CR>
@@ -180,28 +186,31 @@ inoremap ww <Esc>:w<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Python Comments indentation
+" Spell Check
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-inoremap # X#
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim check spell according to the detected filetype.
 autocmd FileType text,mail,human setlocal spell spelllang=en_us
 autocmd FileType vimwiki,plaintex,tex setlocal spell spelllang=en_us
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Abbreviation
+" Abbreviation - Common typos
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ab teh the
 ab fro for
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim Markdown
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Adjust new list item indent
+let g:vim_markdown_new_list_item_indent = 2
+" Disable folding - One can also use :set [no]foldenable
+let g:vim_markdown_folding_disabled = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Backups
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn of backup for vimwiki files
+" Turn off backup for vimwiki files
 autocmd FileType vimwiki set noswapfile
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -238,30 +247,6 @@ function! Retab(string)
     return rv
 endfunction
 
-" For files with long lines toggle the way k and j movement happens
-noremap <silent> <Leader>w :call ToggleLongLineMovement()<CR>
-let g:longLineMovement = 0
-function ToggleLongLineMovement()
-  if g:longLineMovement
-    echo "Movement across long line OFF"
-    silent! nunmap <buffer> k
-    silent! nunmap <buffer> j
-    silent! nunmap <buffer> 0
-    silent! nunmap <buffer> $
-    inoremap jj <Esc>
-    let g:longLineMovement=0
-  else
-    echo "Movement across long line ON"
-    setlocal wrap lbr
-    noremap <buffer> <silent> k gk
-    noremap <buffer> <silent> j gj
-    noremap <buffer> <silent> 0 g0
-    noremap <buffer> <silent> $ g$
-    inoremap gjgj <Esc>
-    let g:longLineMovement=1
-  endif
-endfunction
-
 "Shortcut for moving between Vim windows
 let i = 1
 while i <= 9
@@ -270,6 +255,10 @@ while i <= 9
 endwhile
 
 " Copy paste from windows clipboard
+"nnoremap <C-c> "+y
+"vnoremap <C-c> "+y
+"nnoremap <C-v> "+gP
+"vnoremap <C-v> "+gP
 vmap <C-c> "+yi
 vmap <C-x> "+c
 vmap <C-v> c<ESC>"+p
@@ -278,6 +267,7 @@ imap <C-v> <ESC>"+pa
 
 "Disable white space by default
 "DisableWhitespace
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set Paths
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -289,7 +279,83 @@ let g:vimwiki_list = [{'path': '~/OneDrive\ -\ Microsoft/VimWiki/', 'path_html':
 
 " Run time path
 "set runtimepath+=/home/rajkp/.vim
+",/usr/share/vim/addons/
 
+" Ctrl-P
+nnoremap <Leader>fu : CtrlPFunky<CR>
 "let g:ctrlp_map = '<c-p>'
 "let g:ctrlp_cmd = 'CtrlP'
 "let g:ctrlp_working_path_mode='ra'
+
+" Split Windows and switch
+nnoremap <leader>w <C-w>v<C-w>l
+
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
+
+" Add git path
+if has('win32')
+    let $PATH .= ';' . 'C:/Program Files/Git/bin'
+endif
+
+" Handling Buffers
+" Move between buffer (next, previous, delete)
+map <leader>n :bn<cr>
+map <leader>p :bp<cr>
+
+" ----------------------------------------------------------------------------
+" vim-fugitive
+" ----------------------------------------------------------------------------
+nmap     <Leader>g :Gstatus<CR>gg<c-n>
+nnoremap <Leader>d :Gdiff<CR>
+
+" List of all the buffers
+nnoremap <leader>bb :buffers<cr>:b<space>
+" Switch between most recent buffer
+nnoremap <leader><tab> :b#<cr>
+
+" FZF
+" Find file under current and Home directory
+nnoremap <silent> <leader>f :FZF<cr>
+nnoremap <silent> <leader>fs :FZF ../<cr>
+nnoremap <silent> <leader>F :FZF ~/Project/MS<cr>
+command! -bang -nargs=* Ag
+  \ call FZF#vim#ag(<q-args>,
+  \                 <bang>0 ? FZF#vim#with_preview('up:60%')
+  \                         : FZF#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+
+command! -bang -nargs=* GGrep
+  \ call FZF#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <Leader>z :ZoomToggle<CR>
+
+" Supertab
+" Enter only select the suggestion without adding newline
+let g:SuperTabCrMapping = 1
+
+" Recall older/recent command-line from history
+cnoremap <C-P> <UP>
+cnoremap <C-N> <DOWN>
