@@ -12,9 +12,9 @@
 set nocompatible               " Prevents vim from emulating vi's limitations
 filetype off                   " required!
 "
-set rtp+=C:/Users/raj/vimfiles/bundle/Vundle.vim
+set rtp+=C:/Users/rajkr/.vim/bundle/Vundle.vim
 set rtp+=~/.fzf
-call vundle#begin('C:/Users/raj/vimfiles/bundle/')
+call vundle#begin('C:/Users/rajkr/.vim/bundle/')
 "
 " let Vundle manage Vundle
 Plugin 'gmarik/vundle'
@@ -96,7 +96,9 @@ syntax on             "Enables syntax highlighting
 "set background=dark  "If general background is black
 "set background=light "If general background is black
 "set t_Co=256
+colorscheme wombat     " Wombat color scheme
 "colorscheme solarized " Solarize color scheme
+"colorscheme Monokai   " Monokai color scheme
 "let g:solarized_termtrans=1
 "let g:solarized_italic=0 " Comments not italic in solarize scheme
 "let g:solarized_contrast="high"
